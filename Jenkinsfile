@@ -26,6 +26,14 @@ pipeline{
                                 sh 'mvn test'
                                 }
                              }
+                stage('Code Quality Check'){
+                             steps{
+                                 sh 'mvn checkstyle:check'
+                                 sh 'mvn pmd:check'
+                                 sh 'mvn spotbugs:check'
+                                  }
+                              }
+                 
                  stage('Build Docker Image'){
                                 steps{
                                  sh "docker build -t $IMAGE_NAME:$IMAGE_TAG ."
