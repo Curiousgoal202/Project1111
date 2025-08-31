@@ -23,7 +23,7 @@ pipeline{
                                }
                 stage('Code Quality Check'){
                              steps{
-                                 sh 'mvn checkstyle:check'
+                                 sh 'mvn checkstyle:checkstyle'
                                  sh 'mvn pmd:check'
                                  sh 'mvn spotbugs:check'
                                   }
