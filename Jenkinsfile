@@ -82,4 +82,21 @@ pipeline{
                            }
                      }
  
-                                               
+         post {
+        success {
+            echo "✅ Deployment successful!"
+            mail to: 'santosgoal2024@gmail.com',
+                 subject: "SUCCESS: Webserver Pipeline",
+                 body: "Your webserver is up on port $SERVER_PORT"
+        }
+        failure {
+            echo "❌ Deployment failed!"
+            mail to: 'santosgoal2024@gmail.com',
+                 subject: "FAILED: Webserver Pipeline",
+                 body: "Please check the Jenkins logs for details."
+        }
+    }
+}
+
+
+                                      
