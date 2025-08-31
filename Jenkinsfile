@@ -18,20 +18,20 @@ pipeline{
                               }
                   stage('Build'){
                             steps{
-                                sh 'mvn clean package'
+                                sh 'mvn clean install -DskipTests'
                                       }
                                }
-                 stage('Test'){
-                              steps {
-                                sh 'mvn test'
-                                }
-                             }
                 stage('Code Quality Check'){
                              steps{
                                  sh 'mvn checkstyle:check'
                                  sh 'mvn pmd:check'
                                  sh 'mvn spotbugs:check'
                                   }
+                              }
+                 stage('Test'){
+                                steps{
+                                    sh 'mvn test'
+                                      }
                               }
                  
                  stage('Build Docker Image'){
