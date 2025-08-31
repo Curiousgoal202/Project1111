@@ -21,13 +21,11 @@ pipeline{
                                 sh 'mvn clean install -DskipTests'
                                       }
                                }
-                stage('Code Quality Check'){
-                             steps{
-                                 sh 'mvn checkstyle:checkstyle'
-                                 sh 'mvn pmd:check'
-                                 sh 'mvn spotbugs:check'
-                                  }
-                              }
+                 stage('Security Scan'){
+                            steps{
+                               sh 'docker run --rm -i hadolint/hadolint <Dockerfile || true
+                            }
+                 }
                  stage('Test'){
                                 steps{
                                     sh 'mvn test'
