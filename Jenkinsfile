@@ -37,6 +37,24 @@ pipeline{
                                  sh "docker build -t $IMAGE_NAME:$IMAGE_TAG ."
                                      }
                                    }
+            stage('Push Docker Image') {
+    steps {
+        script {
+            withCredentials([usernamePassword(credentialsId: 'creds',
+                                              usernameVariable: 'DOCKER_USER',
+                                              passwordVariable: 'DOCKER_PASS')]) {
+                sh """
+                    echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+                    docker tag $IMAGE_NAME:$IMAGE_TAG $DOCKER_USER/$IMAGE_NAME:$IMAGE_TAG
+                    docker push $DOCKER_USER/$IMAGE_NAME:$IMAGE_TAG
+                """
+            }
+        }
+    }
+}
+
+
+                                 
                  stage('Stop Old Container'){
                                     steps{
                                     sh """
