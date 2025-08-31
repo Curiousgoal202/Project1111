@@ -42,7 +42,7 @@ pipeline{
                  stage('Run New Container'){
                                       steps{
                                        sh """
-                                         docker run -d --name webserver -p $SERVER_PORT:8085  $IMAGE_NAME:$IMAGE_TAG
+                                         docker run -d --name webserver -p $SERVER_PORT:80  $IMAGE_NAME:$IMAGE_TAG
                                             """
                                           }
                                      }
